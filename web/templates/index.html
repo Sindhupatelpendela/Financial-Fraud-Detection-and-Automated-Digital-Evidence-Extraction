@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        body.predict-bg {
+            background: linear-gradient(120deg, #b6c6e6 0%, #e8eafc 60%, #c1f0e8 100%);
+        }
+        .predict-title {
+            font-size: 2.2em;
+            font-weight: 800;
+            color: #7c3aed;
+            margin-bottom: 0.2em;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .predict-desc {
+            color: #444;
+            font-size: 1.08em;
+            margin-bottom: 2em;
+            text-align: center;
+        }
+        .glass-form {
+            background: #23233bcc;
+            box-shadow: 0 4px 24px #7c3aed22;
+            border-radius: 18px;
+            padding: 38px 36px 24px 36px;
+            margin: 32px auto 0 auto;
+            border: none;
+            max-width: 600px;
+        }
+        .gradient-btn {
+            background: #7c3aed;
+            color: #fff;
+            font-size: 1.1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 36px;
+            margin-top: 18px;
+            box-shadow: 0 2px 12px #7c3aed33;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .gradient-btn:hover {
+            background: #5f2eea;
+            transform: translateY(-2px) scale(1.03);
+        }
+    </style>
+</head>
+<body class="predict-bg">
+    <nav class="dashboard-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i data-feather="shield"></i>
+                <span>Fraud Detection System</span>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/detect" class="nav-link active">Detection</a>
+                <a href="/dashboard" class="nav-link">Dashboard</a>
+                <a href="/real-time" class="nav-link">Real-time</a>
+                <a href="/evidence" class="nav-link">Evidence</a>
+            </div>
+        </div>
+    </nav>
+    
+    <header>
+        <div class="predict-title"><i data-feather="activity"></i> Fraud Detection</div>
+        <div class="predict-desc">Enter transaction details below to check if it's fraudulent using our advanced ML model.</div>
+    </header>
+    <main class="center-flex">
+        <section class="glass-form">
+            <form id="predict-form">
+                <div class="form-row">
+                    <label for="step">Step</label>
+                    <input type="number" id="step" name="step" min="0" placeholder="Step" required>
+                </div>
+                <div class="form-row">
+                    <label for="customer">Customer ID</label>
+                    <input type="number" id="customer" name="customer" min="0" placeholder="Customer ID" required>
+                </div>
+                <div class="form-row">
+                    <label for="age">Customer Age</label>
+                    <input type="number" id="age" name="age" min="18" max="100" placeholder="Customer Age" required>
+                </div>
+                <div class="form-row">
+                    <label for="merchant">Merchant ID</label>
+                    <input type="number" id="merchant" name="merchant" min="0" placeholder="Merchant ID" required>
+                </div>
+                <div class="form-row">
+                    <label for="category">Category (numeric)</label>
+                    <input type="number" id="category" name="category" min="0" placeholder="Category (numeric)" required>
+                </div>
+                <div class="form-row">
+                    <label for="amount">Transaction Amount</label>
+                    <input type="number" step="0.01" id="amount" name="amount" min="0" placeholder="Transaction Amount" required>
+                </div>
+                <div class="form-row gender-row">
+                    <label>Gender:</label>
+                    <div class="gender-options">
+                        <label><input type="radio" name="gender" value="Male" required> Male</label>
+                        <label><input type="radio" name="gender" value="Female"> Female</label>
+                    </div>
+                </div>
+                <button type="submit" class="gradient-btn"><i data-feather="zap"></i> Predict</button>
+            </form>
+            <div id="result-container">
+                <div id="spinner" class="spinner" style="display:none;"></div>
+                <div id="result"></div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p style="text-align:center;color:#b8aaff;font-size:0.93em;margin-top:32px;margin-bottom:8px;opacity:0.45;font-weight:400;">&copy; 2024 Fraud Detection System. All rights reserved.</p>
+    </footer>
+    <script src="/static/main.js"></script>
+    <script>feather.replace()</script>
+    <script src="/static/stars.js"></script>
+</body>
+</html> 

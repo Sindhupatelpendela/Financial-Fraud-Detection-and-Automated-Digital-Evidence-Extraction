@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Monitoring - Fraud Detection System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/dashboard.css">
+    <link rel="stylesheet" href="/static/real_time.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="realtime-bg">
+    <nav class="dashboard-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i data-feather="shield"></i>
+                <span>Fraud Detection System</span>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/detect" class="nav-link">Detection</a>
+                <a href="/dashboard" class="nav-link">Dashboard</a>
+                <a href="/real-time" class="nav-link active">Real-time</a>
+                <a href="/evidence" class="nav-link">Evidence</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1><i data-feather="activity"></i> Real-time Transaction Monitoring</h1>
+            <p>Live monitoring of financial transactions with instant fraud detection</p>
+        </header>
+
+        <div class="realtime-stats">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i data-feather="zap"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="transactions-per-minute">0</h3>
+                    <p>Transactions/min</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i data-feather="alert-triangle"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="flagged-transactions">0</h3>
+                    <p>Flagged Today</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i data-feather="dollar-sign"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="total-volume">$0</h3>
+                    <p>Total Volume</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i data-feather="clock"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="avg-processing-time">0ms</h3>
+                    <p>Avg Processing</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="realtime-content">
+            <div class="main-content">
+                <div class="live-transactions-section">
+                    <div class="section-header">
+                        <h2><i data-feather="list"></i> Live Transactions</h2>
+                        <div class="section-actions">
+                            <button class="btn-secondary" onclick="toggleAutoGenerate()" id="auto-generate-btn">
+                                <i data-feather="play"></i> Start Auto-Generate
+                            </button>
+                            <button class="btn-primary" onclick="generateSingleTransaction()">
+                                <i data-feather="plus"></i> Generate Transaction
+                            </button>
+                        </div>
+                    </div>
+                    <div class="transactions-container">
+                        <div class="transactions-list" id="transactions-list">
+                            <!-- Live transactions will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/real_time.js"></script>
+    <script>feather.replace()</script>
+</body>
+</html> 

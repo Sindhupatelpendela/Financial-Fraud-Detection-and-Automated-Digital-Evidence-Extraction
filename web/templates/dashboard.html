@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investigator Dashboard - Fraud Detection System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/dashboard.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dashboard-bg">
+    <nav class="dashboard-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i data-feather="shield"></i>
+                <span>Fraud Detection System</span>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/detect" class="nav-link">Detection</a>
+                <a href="/dashboard" class="nav-link active">Dashboard</a>
+                <a href="/real-time" class="nav-link">Real-time</a>
+                <a href="/evidence" class="nav-link">Evidence</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1><i data-feather="activity"></i> Investigator Dashboard</h1>
+            <p>Review flagged cases and manage evidence collection</p>
+        </header>
+
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i data-feather="alert-triangle"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="total-cases">0</h3>
+                    <p>Flagged Cases</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i data-feather="clock"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="pending-cases">0</h3>
+                    <p>Pending Review</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i data-feather="file-text"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="evidence-collected">0</h3>
+                    <p>Evidence Items</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i data-feather="check-circle"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="resolved-cases">0</h3>
+                    <p>Resolved Cases</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="main-content">
+                <div class="cases-section">
+                    <div class="section-header">
+                        <h2><i data-feather="list"></i> Flagged Cases</h2>
+                        <div class="section-actions">
+                            <button class="btn-secondary" onclick="refreshCases()">
+                                <i data-feather="refresh-cw"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+                    <div class="cases-table-container">
+                        <table class="cases-table">
+                            <thead>
+                                <tr>
+                                    <th>Case ID</th>
+                                    <th>Customer</th>
+                                    <th>Amount</th>
+                                    <th>Risk Score</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cases-tbody">
+                                <!-- Cases will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Case Details Modal -->
+    <div id="case-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Case Details</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="case-details">
+                    <div class="detail-row">
+                        <label>Case ID:</label>
+                        <span id="modal-case-id"></span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Customer ID:</label>
+                        <span id="modal-customer-id"></span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Transaction Amount:</label>
+                        <span id="modal-amount"></span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Risk Score:</label>
+                        <span id="modal-risk-score"></span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Location:</label>
+                        <span id="modal-location"></span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Merchant:</label>
+                        <span id="modal-merchant"></span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Category:</label>
+                        <span id="modal-category"></span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Suspicious Patterns:</label>
+                        <div id="modal-patterns" class="patterns-list"></div>
+                    </div>
+                </div>
+                
+                <div class="evidence-section">
+                    <h3><i data-feather="file-text"></i> Digital Evidence</h3>
+                    <div class="evidence-tabs">
+                        <button class="tab-btn active" onclick="showEvidenceTab('logs')">System Logs</button>
+                        <button class="tab-btn" onclick="showEvidenceTab('metadata')">Metadata</button>
+                        <button class="tab-btn" onclick="showEvidenceTab('session')">Session Info</button>
+                    </div>
+                    <div id="evidence-content" class="evidence-content">
+                        <!-- Evidence content will be loaded here -->
+                    </div>
+                </div>
+                
+                <div class="case-actions">
+                    <h3>Case Actions</h3>
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="updateCaseStatus('Under Investigation')">
+                            <i data-feather="search"></i> Start Investigation
+                        </button>
+                        <button class="btn-secondary" onclick="updateCaseStatus('Evidence Collected')">
+                            <i data-feather="file-text"></i> Collect Evidence
+                        </button>
+                        <button class="btn-success" onclick="updateCaseStatus('Case Closed')">
+                            <i data-feather="check-circle"></i> Close Case
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/dashboard.js"></script>
+    <script>feather.replace()</script>
+</body>
+</html> 

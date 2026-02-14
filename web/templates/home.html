@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        body.home-bg {
+            background: linear-gradient(120deg, #ffffff 0%, #b596ffcc 100%);
+        }
+        .home-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 16px 0 16px;
+            text-align: center;
+        }
+        .home-title {
+            font-size: 2.6em;
+            font-weight: 800;
+            color: #7c3aed;
+            margin-bottom: 0.2em;
+            letter-spacing: 1px;
+        }
+        .home-subtitle {
+            font-size: 1.2em;
+            color: #22223b;
+            margin-bottom: 0.7em;
+        }
+        .home-desc {
+            color: #444;
+            font-size: 1.08em;
+            margin-bottom: 2.2em;
+        }
+        .home-btn {
+            background: #7c3aed;
+            color: #fff;
+            font-size: 1.1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 36px;
+            margin-bottom: 2.5em;
+            box-shadow: 0 2px 12px #7c3aed33;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .home-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2.5em;
+        }
+        .home-btn {
+            background: #7c3aed;
+            color: #fff;
+            font-size: 1.1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 36px;
+            box-shadow: 0 2px 12px #7c3aed33;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .home-btn.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: #23233b;
+            border: 2px solid #7c3aed;
+        }
+        .home-btn:hover {
+            background: #5f2eea;
+            transform: translateY(-2px) scale(1.03);
+        }
+        .home-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: #23233b;
+        }
+        
+        .demo-links {
+            margin-bottom: 2.5em;
+            text-align: center;
+        }
+        
+        .demo-links h3 {
+            color: #23233b;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 1.5em;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .demo-link {
+            background: rgba(255, 255, 255, 0.9);
+            color: #23233b;
+            text-decoration: none;
+            padding: 20px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .demo-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-color: #7c3aed;
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        .demo-link i {
+            font-size: 2em;
+            color: #7c3aed;
+        }
+        
+        .demo-link span {
+            font-weight: 600;
+            font-size: 1em;
+        }
+        .features-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        .feature-card {
+            background: #23233b;
+            color: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px #7c3aed22;
+            padding: 32px 28px 24px 28px;
+            max-width: 270px;
+            min-width: 220px;
+            flex: 1 1 220px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .feature-icon {
+            font-size: 2.2em;
+            margin-bottom: 8px;
+        }
+        .feature-title {
+            font-size: 1.13em;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .feature-desc {
+            font-size: 1em;
+            color: #c1c1e0;
+        }
+        @media (max-width: 900px) {
+            .features-row {
+                flex-direction: column;
+                align-items: center;
+                gap: 18px;
+            }
+            .feature-card {
+                max-width: 98vw;
+                min-width: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="home-bg">
+    <div class="home-container">
+        <div class="home-title">Financial Fraud Detection and Automated Digital Evidence Extraction</div>
+        <div class="home-subtitle">AI-powered security for financial transactions</div>
+        <div class="home-desc">
+            Welcome to the Fraud Detection System! This tool leverages advanced <b>Machine Learning</b> to help identify fraudulent transactions in your data. Enjoy a modern, secure, and user-friendly experience for fraud analysis with comprehensive investigator tools.
+        </div>
+        <div class="home-buttons">
+            <a href="/detect" class="home-btn">Go to Fraud Detection</a>
+            <a href="/dashboard" class="home-btn secondary">Investigator Dashboard</a>
+        </div>
+        
+        <div class="demo-links">
+            <h3>Quick Demo Links</h3>
+            <div class="demo-grid">
+                <a href="/dashboard" class="demo-link">
+                    <i data-feather="search"></i>
+                    <span>Investigator Dashboard</span>
+                </a>
+                <a href="/real-time" class="demo-link">
+                    <i data-feather="activity"></i>
+                    <span>Real-time Monitoring</span>
+                </a>
+                <a href="/evidence" class="demo-link">
+                    <i data-feather="file-text"></i>
+                    <span>Evidence Management</span>
+                </a>
+                <a href="/detect" class="demo-link">
+                    <i data-feather="shield"></i>
+                    <span>Fraud Detection</span>
+                </a>
+            </div>
+        </div>
+        <div class="features-row">
+            <div class="feature-card">
+                <span class="feature-icon"><i data-feather="cpu"></i></span>
+                <div class="feature-title">ML-powered Analysis</div>
+                <div class="feature-desc">Advanced machine learning models analyze transaction patterns for fraud detection.</div>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon"><i data-feather="activity"></i></span>
+                <div class="feature-title">Real-time Monitoring</div>
+                <div class="feature-desc">Live transaction monitoring with instant fraud detection and alerting.</div>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon"><i data-feather="search"></i></span>
+                <div class="feature-title">Investigator Dashboard</div>
+                <div class="feature-desc">Comprehensive case management with flagged case review and evidence tracking.</div>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon"><i data-feather="file-text"></i></span>
+                <div class="feature-title">Evidence Management</div>
+                <div class="feature-desc">Secure storage with hash verification and complete chain of custody tracking.</div>
+            </div>
+        </div>
+    </div>
+    <script>feather.replace()</script>
+</body>
+</html> 

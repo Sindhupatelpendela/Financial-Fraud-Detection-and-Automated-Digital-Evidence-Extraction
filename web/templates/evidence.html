@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence Management - Fraud Detection System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/dashboard.css">
+    <link rel="stylesheet" href="/static/evidence.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="evidence-bg">
+    <nav class="dashboard-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i data-feather="shield"></i>
+                <span>Fraud Detection System</span>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/detect" class="nav-link">Detection</a>
+                <a href="/dashboard" class="nav-link">Dashboard</a>
+                <a href="/real-time" class="nav-link">Real-time</a>
+                <a href="/evidence" class="nav-link active">Evidence</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1><i data-feather="file-text"></i> Evidence Management System</h1>
+            <p>Secure storage and integrity verification of digital evidence</p>
+        </header>
+
+        <div class="evidence-stats">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i data-feather="database"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="total-evidence">0</h3>
+                    <p>Evidence Items</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i data-feather="shield-check"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="verified-evidence">0</h3>
+                    <p>Verified Items</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i data-feather="lock"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="encrypted-evidence">0</h3>
+                    <p>Encrypted Items</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i data-feather="clock"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="chain-of-custody">100%</h3>
+                    <p>Chain of Custody</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="evidence-content">
+            <div class="main-content">
+                <div class="evidence-section">
+                    <div class="section-header">
+                        <h2><i data-feather="search"></i> Evidence Search & Verification</h2>
+                        <div class="section-actions">
+                            <button class="btn-primary" onclick="performIntegrityCheck()">
+                                <i data-feather="shield-check"></i> Integrity Check
+                            </button>
+                            <button class="btn-secondary" onclick="exportEvidence()">
+                                <i data-feather="download"></i> Export Evidence
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="search-container">
+                        <div class="search-box">
+                            <input type="text" id="evidence-search" placeholder="Search by case ID, evidence type, or hash...">
+                            <button onclick="searchEvidence()">
+                                <i data-feather="search"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="evidence-tabs">
+                        <button class="tab-btn active" onclick="showEvidenceTab('all')">All Evidence</button>
+                        <button class="tab-btn" onclick="showEvidenceTab('logs')">System Logs</button>
+                        <button class="tab-btn" onclick="showEvidenceTab('metadata')">Metadata</button>
+                        <button class="tab-btn" onclick="showEvidenceTab('session')">Session Info</button>
+                        <button class="tab-btn" onclick="showEvidenceTab('network')">Network Traces</button>
+                    </div>
+
+                    <div class="evidence-list" id="evidence-list">
+                        <!-- Evidence items will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="integrity-status">
+                    <h3><i data-feather="shield-check"></i> Integrity Status</h3>
+                    <div class="integrity-indicators">
+                        <div class="integrity-item">
+                            <span class="integrity-dot verified"></span>
+                            <span>Hash Verification</span>
+                            <span class="status-text">All Verified</span>
+                        </div>
+                        <div class="integrity-item">
+                            <span class="integrity-dot verified"></span>
+                            <span>Digital Signatures</span>
+                            <span class="status-text">Valid</span>
+                        </div>
+                        <div class="integrity-item">
+                            <span class="integrity-dot verified"></span>
+                            <span>Chain of Custody</span>
+                            <span class="status-text">Complete</span>
+                        </div>
+                        <div class="integrity-item">
+                            <span class="integrity-dot verified"></span>
+                            <span>Encryption Status</span>
+                            <span class="status-text">AES-256</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="storage-info">
+                    <h3><i data-feather="hard-drive"></i> Storage Information</h3>
+                    <div class="storage-details">
+                        <div class="storage-item">
+                            <label>Total Storage:</label>
+                            <span>1.2 TB</span>
+                        </div>
+                        <div class="storage-item">
+                            <label>Used Space:</label>
+                            <span>456 GB</span>
+                        </div>
+                        <div class="storage-item">
+                            <label>Available:</label>
+                            <span>744 GB</span>
+                        </div>
+                        <div class="storage-item">
+                            <label>Backup Status:</label>
+                            <span class="status-ok">Up to Date</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-alerts">
+                    <h3><i data-feather="alert-triangle"></i> Security Alerts</h3>
+                    <div class="alerts-list" id="alerts-list">
+                        <div class="alert-item info">
+                            <i data-feather="info"></i>
+                            <div>
+                                <h4>System Secure</h4>
+                                <p>All evidence integrity checks passed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Evidence Details Modal -->
+    <div id="evidence-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="evidence-modal-title">Evidence Details</h2>
+                <span class="close" onclick="closeEvidenceModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="evidence-details">
+                    <div class="detail-row">
+                        <label>Evidence ID:</label>
+                        <span id="modal-evidence-id"></span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Type:</label>
+                        <span id="modal-evidence-type"></span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Case ID:</label>
+                        <span id="modal-case-id"></span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Timestamp:</label>
+                        <span id="modal-timestamp"></span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Hash (SHA-256):</label>
+                        <span id="modal-hash" class="hash-display"></span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Digital Signature:</label>
+                        <span id="modal-signature" class="signature-display"></span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Encryption:</label>
+                        <span id="modal-encryption"></span>
+                    </div>
+                </div>
+                
+                <div class="evidence-content-section">
+                    <h3>Evidence Content</h3>
+                    <div id="evidence-content-display" class="content-display">
+                        <!-- Evidence content will be displayed here -->
+                    </div>
+                </div>
+                
+                <div class="chain-of-custody">
+                    <h3>Chain of Custody</h3>
+                    <div class="custody-timeline" id="custody-timeline">
+                        <!-- Chain of custody timeline will be displayed here -->
+                    </div>
+                </div>
+                
+                <div class="evidence-actions">
+                    <h3>Actions</h3>
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="verifyEvidence()">
+                            <i data-feather="shield-check"></i> Verify Integrity
+                        </button>
+                        <button class="btn-secondary" onclick="downloadEvidence()">
+                            <i data-feather="download"></i> Download
+                        </button>
+                        <button class="btn-success" onclick="exportEvidenceChain()">
+                            <i data-feather="file-text"></i> Export Chain
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/evidence.js"></script>
+    <script>feather.replace()</script>
+</body>
+</html> 
